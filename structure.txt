@@ -1,0 +1,39 @@
+server.py
+
+class serverSocket
+	def createSocket()
+		#binding and starting the server
+
+class httpUtils
+	def getDateTime()
+		#date-time in http format
+	def getHostName()
+		#extract host name from request
+	def getFilePath()
+		#extract file path from request
+	def getMIMEType()
+		#extract MIME type from request
+	def getFileData()
+		#extract data from file
+
+class status
+	#status declarations
+	def showErrorPage()
+		#error page with appropriate status code
+
+class httpMethods
+	def resGET()
+		#response to get request
+		#resHead(), fetch data
+	def resPOST()
+		#response to post request
+		#receive, write data, construct headers
+	def resHEAD()
+		#response to head request
+		#construct headers
+	def resPUT()
+		#response to put request
+		#receive, write data, construct headers
+	def resDELETE()
+		#response to delete request
+		#delete resource, construct headers
