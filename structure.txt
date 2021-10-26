@@ -4,7 +4,7 @@ class serverSocket
 	def createSocket()
 		#binding and starting the server
 
-class httpUtils
+class request
 	def getDateTime()
 		#date-time in http format
 	def getHostName()
