@@ -1,5 +1,4 @@
 import sys
-
 from daemon import daemon
 import serverHTTP
 
