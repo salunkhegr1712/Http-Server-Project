@@ -1,5 +1,4 @@
-"""Generic linux daemon base class for python 3.x."""
-
+#Generic linux daemon base class for python 3.x.
 import sys, os, time, atexit, signal
 
 class daemon:
