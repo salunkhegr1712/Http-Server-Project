@@ -1,19 +1,23 @@
+#importing The libraries
 import socket
 import os
 import mimetypes
 
+#creation of socket classs 
 class ServerSocket(object):
 	def __init__(self, port = 30000):
 		self.PORT = port
 		self.SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.SOCKET.bind(('',self.PORT))
 		self.SOCKET.listen(1)
-		
+
+#creation of error class		
 class Error(object):
 	def __init__(self):
 		self.CONTINUE = [100, "Continue"]
 		self.SWITCHING_PROTOCOLS = [101, "Switching protocols"]
-		
+
+		# Basic accept and content error
 		self.OK = [200, "Ok"]
 		self.CREATED = [201, "Created"]
 		self.ACCEPTED = [202, "Accepted"]
@@ -22,6 +26,7 @@ class Error(object):
 		self.RESET_CONTENT = [205, "Reset content"]
 		self.PARTIAL_CONTENT = [206, "Partial content"]
 		
+		# Choice and modification relates errors
 		self.MULTIPLE_CHOICES = [300, "Multiple choices"]
 		self.MOVED_PERMANENTLY = [301, "Moved permanent"]
 		self.FOUND = [302, "Found"]
@@ -29,7 +34,8 @@ class Error(object):
 		self.NOT_MODIFIED = [304, "Not modified"]
 		self.USE_PROXY = [305, "Use proxy"]
 		self.TEMPORARY_REDIRECT = [307, "Temporary redirect"]
-		
+
+		# other Errors
 		self.BAD_REQUEST = [400, "Bad request"]
 		self.UNAUTHORIZED = [401, "Unathorized"]
 		self.PAYMENT_REQUIRED = [402, "Payment required"]
@@ -49,13 +55,15 @@ class Error(object):
 		self.RANGE_NOT_SATISFIABLE = [416, "Range not satisfiable"]
 		self.EXPECTATION_FIALED = [417, "Expectation failed"]
 		
+		#errors related to broswer and server
 		self.INTERNAL_SERVER_ERROR = [500, "Internal server error"]
 		self.NOT_IMPLEMENTED = [501, "Not implemented"]
 		self.BAD_GATEWAY = [502, "Bad gateway"]
 		self.SERVICE_UNAVAILABLE = [503, "Service unavailable"]
 		self.GATEWAY_TIME_OUT = [504, "Gateway timeout"]
 		self.HTTP_VERSION_NOT_SUPPORTED = [505, "HTTP version not supported"]
-		
+
+	#printing the error page with html	
 	def errorPage(self, err):
 		page = "<html>\n"
 		page += "<head><title>" + str(err[0]) + " " + str(err[1]) + "</title></head>\n"
@@ -64,7 +72,8 @@ class Error(object):
 		page += "</body>\n"
 		page += "</html>"
 		return page
-		
+
+#basic class to work on requests with  basic http methods
 class Request(Error):
 	def __init__(self):
 		Error.__init__(self)
@@ -111,7 +120,7 @@ class Request(Error):
 			file = '/index.html'
 		return mimetypes.guess_type(file)
 
-		
+#server class and working on the seerver class		
 class Server(ServerSocket, Request, Error):
 	def __init__(self):
 		ServerSocket.__init__(self)
@@ -129,7 +138,8 @@ class Server(ServerSocket, Request, Error):
 			"\n" + str(content)
 			connectionSocket.send(response.encode())
 			connectionSocket.close()	
-		
+
+#main function initialisation		
 if __name__ == "__main__":
 	server = Server()
 	server.start()
